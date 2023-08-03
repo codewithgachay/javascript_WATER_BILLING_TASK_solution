@@ -1,123 +1,122 @@
 <script>
-    'use strict';
-  
-    //constants
-    //-------------------------------------------------------//
-    //residential
-    const RESIDENTIAL = "r";
-  
-    //comercial
-    const COMMERCIAL = "c";
-  
-    //industrial
-    const INDUSTRIAL = "i";
-  
-    //for callculation
-    const WATER_METER_RESET_AT_NUMBER = 999999999;
-    const GALLON_BY_METER = 10;
-    const TEN_MILLION_GALLON = 10000000;
-    const FOUR_MILLION_GALLON = 4000000;
-    const STARTING_FIVE_COST_$ = 5;
-    const STARTING_1000_COST_$ = 1000;
-    const STARTING_2000_COST_$ = 2000;
-    const BY_0_00025 = 0.00025;
-    const BY_0_0005 = 0.0005;
-  
-    //-------------------------------------------------------//
-  
-    // The customer's beginning meter reading (a positive integer value)
-    //-------------------------------------------------------//
-    var startMeter = parseInt(prompt("Enter your beginning meter number please"));
-    //-------------------------------------------------------//
-  
-    // The customer's ending meter reading (a positive integer value)
-    //-------------------------------------------------------//
-    var endingMeter = parseInt(prompt("Enter your ending meter number please"));
-    //-------------------------------------------------------//
-  
-    // The customer's code (a character)
-    //-------------------------------------------------------//
-    var customersCode = prompt(
-      `Please, select your code. Select "${RESIDENTIAL}"  for residential customer, select "${COMMERCIAL}" for commercial customer or select "${INDUSTRIAL}" for industrial customer.`
+  'use strict';
+
+  //constants
+  //-------------------------------------------------------//
+  //residential
+  const RESIDENTIAL = "r";
+
+  //comercial
+  const COMMERCIAL = "c";
+
+  //industrial
+  const INDUSTRIAL = "i";
+
+  //for callculation
+  const WATER_METER_RESET_AT_NUMBER = 999999999;
+  const GALLON_BY_METER = 10;
+  const TEN_MILLION_GALLON = 10000000;
+  const FOUR_MILLION_GALLON = 4000000;
+  const STARTING_FIVE_COST_$ = 5;
+  const STARTING_1000_COST_$ = 1000;
+  const STARTING_2000_COST_$ = 2000;
+  const BY_0_00025 = 0.00025;
+  const BY_0_0005 = 0.0005;
+
+  //-------------------------------------------------------//
+
+  // The customer's beginning meter reading (a positive integer value)
+  //-------------------------------------------------------//
+  var startMeter = parseInt(prompt("Enter your beginning meter number please"));
+  //-------------------------------------------------------//
+
+  // The customer's ending meter reading (a positive integer value)
+  //-------------------------------------------------------//
+  var endingMeter = parseInt(prompt("Enter your ending meter number please"));
+  //-------------------------------------------------------//
+
+  // The customer's code (a character)
+  //-------------------------------------------------------//
+  var customersCode = prompt(
+    `Please, select your code. Select "${RESIDENTIAL}"  for residential customer, select "${COMMERCIAL}" for commercial customer or select "${INDUSTRIAL}" for industrial customer.`
+  );
+
+  // RESIDENTAL
+  if (customersCode === RESIDENTIAL) {
+    if (endingMeter > startMeter) {
+      var gallon = (endingMeter - startMeter) / GALLON_BY_METER;
+      var totalCost = STARTING_FIVE_COST_$ + gallon * BY_0_0005;
+    } else {
+      var gallon =(( WATER_METER_RESET_AT_NUMBER - startMeter) + endingMeter)/GALLON_BY_METER;
+      var totalCost = STARTING_FIVE_COST_$ + gallon * BY_0_0005;
+    }
+    console.log("1. You are a residential customer ");
+    console.log(`2. Your starting meter is ${startMeter}`);
+    console.log(`3. Your ending meter is ${endingMeter}`);
+    console.log(`4. You used ${gallon} gallons water`);
+    console.log(`5. Total cost: ${totalCost}$`);
+  }
+  // COMMERCIAL
+  else if (customersCode === COMMERCIAL) {
+    if (endingMeter > startMeter) {
+      var gallon = (endingMeter - startMeter) / GALLON_BY_METER;
+      if (gallon <= FOUR_MILLION_GALLON) {
+        var totalCost = STARTING_1000_COST_$;
+      } else {
+        var totalCost =
+          STARTING_1000_COST_$ + (gallon - FOUR_MILLION_GALLON) * BY_0_00025;
+      }
+    } else {
+      var gallon = (( WATER_METER_RESET_AT_NUMBER - startMeter) + endingMeter)/GALLON_BY_METER;
+      if (gallon <= FOUR_MILLION_GALLON) {
+        var totalCost = STARTING_1000_COST_$;
+      } else {
+        var totalCost =
+          STARTING_1000_COST_$ + (gallon - FOUR_MILLION_GALLON) * BY_0_00025;
+      }
+    }
+    console.log("1. You are a commercial customer ");
+    console.log(`2. Your starting meter is ${startMeter}`);
+    console.log(`3. Your ending meter is ${endingMeter}`);
+    console.log(`4. You used ${gallon} gallons water`);
+    console.log(`5. Total cost: ${totalCost}$`);
+  }
+
+  // INDUSTRIAL
+  else if (customersCode === INDUSTRIAL) {
+    if (endingMeter > startMeter) {
+      var gallon = (endingMeter - startMeter) / GALLON_BY_METER;
+      if (gallon <= FOUR_MILLION_GALLON) {
+        var totalCost = STARTING_1000_COST_$;
+      } else if (FOUR_MILLION_GALLON < gallon <= TEN_MILLION_GALLON) {
+        var totalCost = STARTING_2000_COST_$;
+      } else {
+        var totalCost =
+          STARTING_2000_COST_$ + (gallon - TEN_MILLION_GALLON) * BY_0_00025;
+      }
+    } else {
+      var gallon = (( WATER_METER_RESET_AT_NUMBER - startMeter) + endingMeter)/GALLON_BY_METER;
+      if (gallon <= FOUR_MILLION_GALLON) {
+        var totalCost = STARTING_1000_COST_$;
+      } else if (FOUR_MILLION_GALLON < gallon <= TEN_MILLION_GALLON) {
+        var totalCost = STARTING_2000_COST_$;
+      } else {
+        var totalCost =
+          STARTING_2000_COST_$ + (gallon - TEN_MILLION_GALLON) * BY_0_00025;
+      }
+    }
+    console.log("1. You are a industrial customer ");
+    console.log(`2. Your starting meter is ${startMeter}`);
+    console.log(`3. Your ending meter is ${endingMeter}`);
+    console.log(`4. You used ${gallon} gallons water`);
+    console.log(`5. Total cost: ${totalCost}$`);
+  }
+
+  //WRONG OPTION
+  else {
+    alert(
+      "You haven't entered correct letter for code, please run application again"
     );
-  
-    // RESIDENTAL
-    if (customersCode === RESIDENTIAL) {
-      if (endingMeter > startMeter) {
-        var gallon = (endingMeter - startMeter) / GALLON_BY_METER;
-        var totalCost = STARTING_FIVE_COST_$ + gallon * BY_0_0005;
-      } else {
-        var gallon = WATER_METER_RESET_AT_NUMBER - startMeter + endingMeter;
-        var totalCost = STARTING_FIVE_COST_$ + gallon * BY_0_0005;
-      }
-      console.log("1. You are a residential customer ");
-      console.log(`2. Your starting meter is ${startMeter}`);
-      console.log(`3. Your ending meter is ${endingMeter}`);
-      console.log(`4. You used ${gallon} gallons water`);
-      console.log(`5. Total cost: ${totalCost}$`);
-    }
-    // COMMERCIAL
-    else if (customersCode === COMMERCIAL) {
-      if (endingMeter > startMeter) {
-        var gallon = (endingMeter - startMeter) / GALLON_BY_METER;
-        if (gallon <= FOUR_MILLION_GALLON) {
-          var totalCost = STARTING_1000_COST_$;
-        } else {
-          var totalCost =
-            STARTING_1000_COST_$ + (gallon - FOUR_MILLION_GALLON) * BY_0_00025;
-        }
-      } else {
-        var gallon = WATER_METER_RESET_AT_NUMBER - startMeter + endingMeter;
-        if (gallon <= FOUR_MILLION_GALLON) {
-          var totalCost = STARTING_1000_COST_$;
-        } else {
-          var totalCost =
-            STARTING_1000_COST_$ + (gallon - FOUR_MILLION_GALLON) * BY_0_00025;
-        }
-      }
-      console.log("1. You are a commercial customer ");
-      console.log(`2. Your starting meter is ${startMeter}`);
-      console.log(`3. Your ending meter is ${endingMeter}`);
-      console.log(`4. You used ${gallon} gallons water`);
-      console.log(`5. Total cost: ${totalCost}$`);
-    }
-  
-    // INDUSTRIAL
-    else if (customersCode === INDUSTRIAL) {
-      if (endingMeter > startMeter) {
-        var gallon = (endingMeter - startMeter) / GALLON_BY_METER;
-        if (gallon <= FOUR_MILLION_GALLON) {
-          var totalCost = STARTING_1000_COST_$;
-        } else if (FOUR_MILLION_GALLON < gallon <= TEN_MILLION_GALLON) {
-          var totalCost = STARTING_2000_COST_$;
-        } else {
-          var totalCost =
-            STARTING_2000_COST_$ + (gallon - TEN_MILLION_GALLON) * BY_0_00025;
-        }
-      } else {
-        var gallon = WATER_METER_RESET_AT_NUMBER - startMeter + endingMeter;
-        if (gallon <= FOUR_MILLION_GALLON) {
-          var totalCost = STARTING_1000_COST_$;
-        } else if (FOUR_MILLION_GALLON < gallon <= TEN_MILLION_GALLON) {
-          var totalCost = STARTING_2000_COST_$;
-        } else {
-          var totalCost =
-            STARTING_2000_COST_$ + (gallon - TEN_MILLION_GALLON) * BY_0_00025;
-        }
-      }
-      console.log("1. You are a industrial customer ");
-      console.log(`2. Your starting meter is ${startMeter}`);
-      console.log(`3. Your ending meter is ${endingMeter}`);
-      console.log(`4. You used ${gallon} gallons water`);
-      console.log(`5. Total cost: ${totalCost}$`);
-    }
-  
-    //WRONG OPTION
-    else {
-      alert(
-        "You haven't entered correct letter for code, please run application again"
-      );
-    }
-    //-------------------------------------------------------//
-  </script>
-  
+  }
+  //-------------------------------------------------------//
+</script>
