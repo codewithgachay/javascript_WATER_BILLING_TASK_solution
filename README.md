@@ -8,7 +8,7 @@ The program will prompt the user to enter three values (in the following order):
 The customer's code (a character)
 The customer's beginning meter reading (a positive integer value)
 The customer's ending meter reading (a positive integer value)
-It will then process that customer information and display the results. The program will continue to process customers until the user enters an invalid customer code.
+It will then process that customer information and display the results. The program will continue to process customers ◊until the user enters an invalid customer code.
 
 The program will compute the gallons of water used by the customer during the current billing period. The meter is read by a representative of the utility company at the start and at the end of the billing period, and the readings are taken from a meter which has nine digits and records tenths of a gallon.
 
